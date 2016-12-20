@@ -1,5 +1,7 @@
 #SASS CSS Responsive Custom Grid
 
+[Demo on CODEPEN](http://codepen.io/leegunn/pen/QGYYzv/)
+
 Benefits:
 
 * **Clean HTML**: Doesn't require classes on columns. Less markup than bootstrap
