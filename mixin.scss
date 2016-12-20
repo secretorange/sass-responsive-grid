@@ -1,0 +1,56 @@
+@mixin grids($grids) {
+  // SETUP
+  $total-columns: 12;
+  $breakpoints: (xxs:320px, xs:480px, sm:768px, md:992px, lg:1200px);
+  $gutter: 1%;
+  
+  // Width of one column
+  $unit-width: (100% - $gutter * 2 * ($total-columns - 1)) / $total-columns;
+  
+  @each $sel, $sizes in $grids
+  {
+    // Clear fix
+    #{$sel}:after { display: table; content: " "; clear:both; }
+   
+    @each $breakpoint, $width in $breakpoints
+    {
+      $cols: map-get($sizes, $breakpoint);
+      
+      @if $cols != null
+      {
+        @media only screen and (min-width: $width) 
+        {
+          $current-left: 0;
+          
+          @for $i from 1 through length($cols) {
+            $col: nth($cols, $i);
+
+            $property: null; $value: null; $margin-left: null; $margin-right: null;
+            
+            // If the next column pushes over the boundy then reset flush to the left
+            @if $current-left + $col > $total-columns {
+              $current-left: 0;
+            }
+            
+            @if $current-left % $total-columns == 0 { $margin-left: 0px; } @else { $margin-left: $gutter;  }
+            
+            $current-left: $current-left + $col;
+            
+            @if $current-left % $total-columns == 0 { $margin-right: 0px; } @else { $margin-right: $gutter; }
+            
+            // If the row is full then get ready for the next row
+            @if $current-left == $total-columns {
+              $current-left: 0;
+            }
+                        
+            // Sum the unit widths plus the width of the gutters
+            $width: ($unit-width * $col) + (($col - 1) * ($gutter * 2));
+                       
+            #{$sel} > *:nth-child(#{$i}) { width:$width; margin-right:$margin-right; margin-left:$margin-left; float:left; }
+          }
+        }
+      }
+    }
+  }
+}
+ 
