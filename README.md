@@ -10,7 +10,7 @@ Benefits:
 * **Pay to play**: Less CSS than bootstrap
 * **Percentage based gutters**: Ok, not exactly a benefit, but it was the only way I could get it work - I'll chalk it up as a feature :)
  
-Grid CSS is pre built using a mixin, like:
+First, define your grids using the SASS mixin. You specify the selector (class or ID) and the column definitions for different breakpoints (xxs, xs, xm, md, lg)
 
 ````SCSS
   @include grids((
@@ -19,3 +19,14 @@ Grid CSS is pre built using a mixin, like:
     ('.two-col-grid', (sm:(6, 6))),
   ));
 ````
+
+Then simply use your grids in your HTML:
+
+```HTML
+<div class="responsive-four-col-grid">
+  <div>Col One</div>
+  <div>Col Two</div>
+  <div>Col Three</div>
+  <div>Col Four</div>
+</div>
+```
