@@ -1,4 +1,4 @@
-#SASS CSS Responsive Custom Grid
+#SASS Responsive Grid
 
 [Demo on CODEPEN](http://codepen.io/leegunn/pen/QGYYzv/)
 
